@@ -12,25 +12,44 @@ public class Main {
 		ArrayList <Thread> barcosT;
 		barcosT = new ArrayList<Thread> ();
 		
-		for (int i = 0; i < 10; i++) {
+		ArrayList <Grua> gruas;
+		gruas = new ArrayList<Grua> ();
+		
+		ArrayList <Thread> gruasT;
+		gruasT = new ArrayList<Thread> ();
+		
+		ZonaDescarga zona = new ZonaDescarga();
+		Thread t;
+		for (int i = 0; i <9; i++) {
 			barcos.add(new Barco(puerta,true,i));
-			barcosT.add(new Thread(barcos.get(i)));
+			t = new Thread(barcos.get(i));
+			//barcosT.add(new Thread(barcos.get(i));
+			t.start();
 		}
+		Mercante m = new Mercante(puerta, true, 9, 12, 20, 5, zona);
+		barcos.add(m);
+		t = new Thread(m);
+		t.start();
+		
 		for (int i = 10; i < 20; i++) {
 			barcos.add(new Barco(puerta,false,i));
-			barcosT.add(new Thread(barcos.get(i)));
+			t = new Thread(barcos.get(i));
+			t.start();
 		}
-		for (int i = 0; i < barcosT.size(); i++) {
-			barcosT.get(i).start();
+	
+		
+		for(int i = 1; i <4; i++) {
+			gruas.add(new Grua(i, zona));
+			t = new Thread(gruas.get(i-1));
+			t.start();
 		}
 		
-		
-		try {
+	/*	try {
 			for (int i = 0; i < barcosT.size(); i++) {
 				barcosT.get(i).join();
-			}
+			
 		} catch (Exception e) {e.printStackTrace();}
-		
+		*/
 		System.out.println("FIN");
 		
 	}
