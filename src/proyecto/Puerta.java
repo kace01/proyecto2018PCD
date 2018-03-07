@@ -6,10 +6,13 @@ public class Puerta {
 	public Puerta (TorreControl c){
 		this.c = c;
 	}
-	public void entrar(Barco b) {
+	public void entrar(Barco b) throws InterruptedException {
 		c.permisoEntrada(b);
 		for(int i = 0; i<3; i++) {
 			System.out.println("Está entrando el barco: "+b.getId());
+		}
+		if(b instanceof Mercante) {
+			((Mercante) b).getZ().vaciarContenedores((Mercante)b);
 		}
 		c.finEntrada(b);
 	}
