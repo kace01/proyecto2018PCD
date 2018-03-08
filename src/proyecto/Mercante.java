@@ -2,14 +2,15 @@ package proyecto;
 
 public class Mercante extends Barco {
 	private int azucar, harina, sal;
-	private ZonaDescarga z;
+	private ZonaDescarga zona;
+	Grua grua = new Grua();
 	
 	public Mercante(Puerta p, boolean direccion, int id, int azucar, int sal, int harina, ZonaDescarga z) {
 		super(p, direccion, id);
 		this.azucar = azucar;
 		this.harina = harina;
 		this.sal = sal;
-		this.z = z;
+		this.zona = z;
 		}
 
 	public int getAzucar() {
@@ -36,12 +37,15 @@ public class Mercante extends Barco {
 		this.sal = sal;
 	}
 
-	public ZonaDescarga getZ() {
-		return z;
+	public ZonaDescarga getZona() {
+		return zona;
 	}
 
-	public void setZ(ZonaDescarga z) {
-		this.z = z;
+	public void setZona(ZonaDescarga z) {
+		this.zona = z;
+	}
+	public int cantidad () {
+		return sal+azucar+harina;
 	}
 	public boolean vacio () {
 	boolean vacio = true;

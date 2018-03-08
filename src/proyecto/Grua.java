@@ -1,20 +1,23 @@
 package proyecto;
 
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+
 public class Grua implements Runnable{
 	int id;
-	char ident;
 	ZonaDescarga zona;
+	final Lock lock = new ReentrantLock(true);
 	public Grua(int id , ZonaDescarga zona) {
 		this.id = id;
 		this.zona = zona;
 	}
 
-	public Grua(int id, char ident, ZonaDescarga zona) {
-		this.id = id;
-		this.ident = ident;
-		this.zona = zona;
+	
+	public Grua() {
+		// TODO Auto-generated constructor stub
 	}
 
+	
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
@@ -36,14 +39,17 @@ public class Grua implements Runnable{
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-			while(true)
+		while(zona.getCajasQuitadas() < 37){
+			lock.lock();
+			if((id == 1 && zona.getTipo()==1) || (id == 2 && zona.getTipo()==2) || (id == 3 && zona.getTipo()==3)){
 				try {
-					zona.coger(id);
+					zona.recogerCaja(this);
 				} catch (InterruptedException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-		
+		}
+			lock.unlock();	
+		}
 	}
+		
 }

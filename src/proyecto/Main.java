@@ -23,9 +23,9 @@ public class Main {
 		for (int i = 0; i <9; i++) {
 			barcos.add(new Barco(puerta,true,i));
 			t = new Thread(barcos.get(i));
-			//barcosT.add(new Thread(barcos.get(i));
 			t.start();
 		}
+		
 		Mercante m = new Mercante(puerta, true, 9, 12, 20, 5, zona);
 		barcos.add(m);
 		t = new Thread(m);
